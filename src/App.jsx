@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchResult from './pages/SearchResult';
-import SearchForm from './components/SearchForm';
+import DisplayWeather from './pages/DisplayWeather';
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}>
           <Route path="search/:result" element={<SearchResult />} />
+          <Route path="display-weather/:weather" element={<DisplayWeather />} />
         </Route>
       </Routes>
       <ToastContainer />
