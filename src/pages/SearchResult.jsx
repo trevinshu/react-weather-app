@@ -8,7 +8,7 @@ function SearchResult() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const searchResult = async (query) => {
-    const data = await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${query}`);
+    const data = await fetch(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${query}`);
     const results = await data.json();
     setSearchedWeather(results.slice(0, 5));
   };
