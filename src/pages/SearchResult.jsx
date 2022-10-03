@@ -28,8 +28,6 @@ function SearchResult() {
     }, 2000);
   }, [params.result]);
 
-  console.log(searchedWeather);
-
   return (
     <>
       {loading ? (
@@ -37,7 +35,7 @@ function SearchResult() {
           <BeatLoader color="#374151" margin={0} size={30} />
         </div>
       ) : (
-        <motion.div className="mt-10 px-5 md:px-10" initial={{ opacity: 0, x: '-100vw' }} animate={{ opacity: 1, x: 0 }} transition={{ type: 'spring', stiffness: '100' }}>
+        <motion.div className="mt-10 px-5 md:px-10 overflow-hidden" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween', delay: 0.2 }}>
           {searchedWeather.length > 1 ? (
             <h1 className=" text-2xl capitalize mb-5 tracking-widest ">
               Search Results For: <span className="font-bold">{params.result}</span>
@@ -54,7 +52,7 @@ function SearchResult() {
 
           <div className="grid grid-cols-1 gap-7 mb-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {searchedWeather.map((weather, index) => {
-              return <LocationItems weather={weather} key={index} />;
+              return <LocationItems weather={weather} index={index} key={index} />;
             })}
           </div>
         </motion.div>

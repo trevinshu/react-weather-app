@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 function LocationItems({ weather, index }) {
@@ -16,11 +15,7 @@ function LocationItems({ weather, index }) {
         <span className="font-bold text-lg md:text-xl">Country: </span>
         {weather.Country.LocalizedName}
       </p>
-      <Link
-        className="bg-gray-600 w-full rounded-md p-2 text-white uppercase tracking-widest hover:bg-gray-700 text-center md:text-xl"
-        to={`/display-weather`}
-        state={{ latitude: weather.GeoPosition.Latitude, longitude: weather.GeoPosition.Longitude, key: weather.Key }}
-      >
+      <Link className="bg-gray-600 w-full rounded-md p-2 text-white uppercase tracking-widest hover:bg-gray-700 text-center md:text-xl" to={`/display-weather`} state={{ weather: weather }}>
         View Weather
       </Link>
     </div>
