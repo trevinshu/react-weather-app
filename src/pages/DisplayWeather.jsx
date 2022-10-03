@@ -24,7 +24,7 @@ function DisplayWeather() {
 
   console.log(displayedWeather);
 
-  return <div>{displayedWeather && <img src={`public/assets/icons/${displayedWeather.DailyForecasts[0].Day.Icon}-s.png`} alt="" />}</div>;
+  return <div>{displayedWeather && <img src={`assets/icons/${displayedWeather.DailyForecasts[0].Day.Icon}-s.png`} alt="" />}</div>;
 }
 
 export default DisplayWeather;
