@@ -1,7 +1,15 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 function DisplayWeather() {
-  return <div>DisplayWeather</div>;
+  const location = useLocation();
+  const { latitude, longitude, key } = location.state;
+  return (
+    <div>
+      DisplayWeather
+      {latitude} and {longitude} and {key}
+    </div>
+  );
 }
 
 export default DisplayWeather;

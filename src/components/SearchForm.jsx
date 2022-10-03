@@ -13,7 +13,6 @@ function SearchForm() {
       toast.error('Please enter a Location', { position: 'bottom-center' });
     } else {
       navigate('/search/' + text.toLowerCase().trim());
-      toast.success(`Result for ${text.toLowerCase().trim()}`, { position: 'bottom-center', hideProgressBar: true });
     }
   };
 
@@ -25,10 +24,10 @@ function SearchForm() {
           setText(e.target.value);
         }}
         value={text}
-        className="border-2 border-gray-600 rounded-md w-full p-2 md:w-1/2"
+        className="border-2 border-gray-600 rounded-md w-full p-2 lg:w-2/3 xl:w-1/2"
         placeholder="Enter a Location..."
       />
-      <button className=" bg-gray-600 w-full rounded-md p-2 text-white uppercase tracking-wide hover:bg-gray-700 md:w-1/2 md:text-xl">Search Weather</button>
+      <button className=" bg-gray-600 w-full rounded-md p-2 text-white uppercase tracking-wide hover:bg-gray-700 lg:w-2/3 xl:w-1/2 md:text-xl">Search Weather</button>
     </form>
   );
 }

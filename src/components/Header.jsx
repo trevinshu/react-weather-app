@@ -1,14 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { BsFillMoonStarsFill } from 'react-icons/bs';
 
 function Header() {
   return (
-    <header className=" bg-gray-600 h-1/2 p-5 flex justify-between">
-      <h1 className=" text-white text-2xl uppercase tracking-wide pl-4">Weather App</h1>
-      <button>
-        {' '}
-        <BsFillMoonStarsFill fill="white" />
-      </button>
+    <header className="bg-white p-4 flex justify-between items-center shadow-md">
+      <Link className="text-gray-700 text-2xl uppercase tracking-wide pl-4" to={'/'}>
+        Weather App
+      </Link>
+      <BsFillMoonStarsFill fill="rgb(55 65 81)" />
     </header>
   );
 }

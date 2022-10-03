@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function LocationItems({ weather, index }) {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} key={index} className="shadow-md p-4 flex flex-col items-center gap-3 md:items-start">
+    <div key={index} className="shadow-md p-4 flex flex-col items-center gap-3 md:items-start">
       <p className="tracking-wider md:text-xl">
         <span className="font-bold text-lg md:text-xl">Location: </span> {weather.LocalizedName}
       </p>
@@ -18,11 +18,12 @@ function LocationItems({ weather, index }) {
       </p>
       <Link
         className="bg-gray-600 w-full rounded-md p-2 text-white uppercase tracking-widest hover:bg-gray-700 text-center md:text-xl"
-        to={`/display-weather/latitude=${weather.GeoPosition.Latitude}&longitude=${weather.GeoPosition.Longitude}&key=${weather.Key}`}
+        to={`/display-weather`}
+        state={{ latitude: weather.GeoPosition.Latitude, longitude: weather.GeoPosition.Longitude, key: weather.Key }}
       >
         View Weather
       </Link>
-    </motion.div>
+    </div>
   );
 }
 
