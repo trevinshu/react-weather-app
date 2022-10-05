@@ -11,7 +11,7 @@ function WeatherItemsNight({ weather, index }) {
       <div className="flex flex-col items-center justify-center gap-4">
         <img src={`assets/icons/${weather.Night?.Icon}-s.png`} alt="" />
         <h2 className="text-3xl tracking-widest">
-          {Math.floor(weather?.Temperature?.Maximum?.Value)}
+          {Math.floor(weather?.Temperature?.Minimum?.Value)}
           {`\u00B0`}C
         </h2>
       </div>
@@ -21,7 +21,7 @@ function WeatherItemsNight({ weather, index }) {
         <div className="shadow-md p-4 rounded-md flex flex-col items-center justify-center gap-2">
           <h4>Feels Like</h4>
           <p className="font-light">
-            {Math.floor(weather?.RealFeelTemperature?.Maximum?.Value)} {`\u00B0`}C
+            {Math.floor(weather?.RealFeelTemperature?.Minimum?.Value)} {`\u00B0`}C
           </p>
         </div>
         <div className="shadow-md p-4 rounded-md flex flex-col items-center justify-center gap-2">
