@@ -22,8 +22,8 @@ function SearchResult() {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      toast.success(`Result for ${params.result.toLowerCase().trim()}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
       searchResult(params.result);
+      toast.success(`Result for ${params.result.toLowerCase().trim()}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
       setLoading(false);
     }, 2000);
   }, [params.result]);
@@ -52,7 +52,7 @@ function SearchResult() {
 
           <div className="grid grid-cols-1 gap-7 mb-10 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {searchedWeather.map((weather, index) => {
-              return <LocationItems weather={weather} index={index} key={index} />;
+              return <LocationItems weather={weather} key={index} />;
             })}
           </div>
         </motion.div>

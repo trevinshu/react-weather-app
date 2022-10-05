@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function LocationItems({ weather, index }) {
   return (
-    <div key={index} className="shadow-md p-4 flex flex-col items-center gap-3 md:items-start">
+    <div key={index} className="shadow-md p-4 flex flex-col items-center gap-3 rounded-md md:items-start">
       <p className="tracking-wider md:text-xl">
         <span className="font-bold text-lg md:text-xl">Location: </span> {weather.LocalizedName}
       </p>
