@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import BeatLoader from 'react-spinners/BeatLoader';
 import WeatherItemsDay from '../components/WeatherItemsDay';
+import { motion } from 'framer-motion';
+import WeatherItemsNight from '../components/WeatherItemsNight';
 
 function DisplayWeather() {
   const location = useLocation();
@@ -69,16 +71,19 @@ function DisplayWeather() {
             </button>
           </div>
           {activeTab === 'day' && (
-            <div className="grid grid-cols-1 mx-4 my-10 gap-6 xl:grid-cols-2">
+            <motion.div className="grid grid-cols-1 mx-4 my-10 gap-6 xl:grid-cols-2" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween' }}>
               {displayedWeather?.DailyForecasts.map((weather, index) => {
                 return <WeatherItemsDay weather={weather} key={index} />;
               })}
-            </div>
+            </motion.div>
           )}
           {activeTab === 'night' && (
             <div>
-              <h2>Night Mode</h2>
-              <img src={`assets/icons/${displayedWeather?.DailyForecasts[0]?.Night?.Icon}-s.png`} alt="" />
+              <motion.div className="grid grid-cols-1 mx-4 my-10 gap-6 xl:grid-cols-2" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween' }}>
+                {displayedWeather?.DailyForecasts.map((weather, index) => {
+                  return <WeatherItemsNight weather={weather} key={index} />;
+                })}
+              </motion.div>
             </div>
           )}
         </div>
