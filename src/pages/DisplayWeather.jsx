@@ -20,30 +20,37 @@ function DisplayWeather() {
   const [displayedWeather, setDisplayedWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('day');
+  const [swapUnit, setUnits] = useState(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
+  const [buttonText, setButtonText] = useState('metric');
 
-  const displayWeather = async (locKey) => {
-    const data = await fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locKey}?apikey=${apiKey}&details=true&metric=true`);
+  let toggle = false;
+  function changeParams(e) {
+    e.preventDefault();
+    toggle = !toggle;
+
+    if (toggle) {
+      setButtonText('Metric');
+      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=false`);
+    } else {
+      setButtonText('Imperial');
+      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
+    }
+  }
+
+  const displayWeather = async () => {
+    const data = await fetch(swapUnit);
     const result = await data.json();
     setDisplayedWeather(result);
   };
 
-  //Code to display weather
-
-  // {displayedWeather && (
-  //   <>
-  //     <img src={`assets/icons/${displayedWeather.DailyForecasts[0].Day.Icon}-s.png`} alt="" />
-  //     <p>{displayedWeather.DailyForecasts[0].Date}</p>
-  //   </>
-  // )}
-
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      displayWeather(key);
+      displayWeather();
       toast.success(`Weather for ${city}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
       setLoading(false);
     }, 2000);
-  }, []);
+  }, [swapUnit]);
 
   console.log(displayedWeather);
 
@@ -54,32 +61,40 @@ function DisplayWeather() {
           <BeatLoader color="#374151" margin={0} size={30} />
         </div>
       ) : (
-        <div className="my-10">
+        <div className="my-10 px-10">
           <h2 className="text-4xl text-center uppercase tracking-widest pb-5">{city}</h2>
-          <div className="flex justify-center items-center gap-2 mb-5">
-            <button
-              className={activeTab === 'day' ? 'active [&.active]:bg-gray-700 p-2 rounded text-white w-1/4 uppercase tracking-widest' : 'uppercase tracking-widest w-1/4'}
-              onClick={() => setActiveTab('day')}
-            >
-              Day
-            </button>
-            <button
-              className={activeTab === 'night' ? 'active  [&.active]:bg-gray-700 p-2 rounded text-white w-1/4 uppercase tracking-widest' : 'uppercase tracking-widest w-1/4'}
-              onClick={() => setActiveTab('night')}
-            >
-              Night
+          <div className="flex justify-between mb-5">
+            <div className="flex gap-2 justify-center items-center">
+              <button
+                className={activeTab === 'day' ? 'active [&.active]:bg-gray-700 p-2 rounded text-white uppercase tracking-widest' : 'uppercase tracking-widest'}
+                onClick={() => setActiveTab('day')}
+              >
+                Day
+              </button>
+              <button
+                className={activeTab === 'night' ? 'active  [&.active]:bg-gray-700 p-2 rounded text-white  uppercase tracking-widest' : 'uppercase tracking-widest'}
+                onClick={() => setActiveTab('night')}
+              >
+                Night
+              </button>
+            </div>
+            <button onClick={changeParams} className="bg-gray-700 p-2 rounded text-white uppercase tracking-widest" type="button">
+              {buttonText}
             </button>
           </div>
           {activeTab === 'day' && (
-            <motion.div className="grid grid-cols-1 mx-4 my-10 gap-6 xl:grid-cols-2" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween' }}>
-              {displayedWeather?.DailyForecasts.map((weather, index) => {
-                return <WeatherItemsDay weather={weather} key={index} />;
-              })}
-            </motion.div>
+            <div>
+              <motion.div className="grid grid-cols-1 my-10 gap-6 xl:grid-cols-2" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween' }}>
+                {displayedWeather?.DailyForecasts.map((weather, index) => {
+                  return <WeatherItemsDay weather={weather} key={index} />;
+                })}
+              </motion.div>
+            </div>
           )}
+
           {activeTab === 'night' && (
             <div>
-              <motion.div className="grid grid-cols-1 mx-4 my-10 gap-6 xl:grid-cols-2" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween' }}>
+              <motion.div className="grid grid-cols-1 my-10 gap-6 xl:grid-cols-2" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween' }}>
                 {displayedWeather?.DailyForecasts.map((weather, index) => {
                   return <WeatherItemsNight weather={weather} key={index} />;
                 })}

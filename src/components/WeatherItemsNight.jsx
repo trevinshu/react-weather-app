@@ -12,7 +12,8 @@ function WeatherItemsNight({ weather, index }) {
         <img src={`assets/icons/${weather.Night?.Icon}-s.png`} alt="" />
         <h2 className="text-3xl tracking-widest">
           {Math.floor(weather?.Temperature?.Minimum?.Value)}
-          {`\u00B0`}C
+          {`\u00B0`}
+          {weather?.Temperature?.Minimum?.Unit}
         </h2>
       </div>
       <p className="text-center tracking-widest text-xl">{weather?.Night?.LongPhrase}</p>
@@ -21,12 +22,17 @@ function WeatherItemsNight({ weather, index }) {
         <div className="shadow-md p-4 rounded-md flex flex-col items-center justify-center gap-2">
           <h4>Feels Like</h4>
           <p className="font-light">
-            {Math.floor(weather?.RealFeelTemperature?.Minimum?.Value)} {`\u00B0`}C
+            {Math.floor(weather?.RealFeelTemperature?.Minimum?.Value)} {`\u00B0`}
+            {weather?.RealFeelTemperature?.Minimum?.Unit}
           </p>
         </div>
         <div className="shadow-md p-4 rounded-md flex flex-col items-center justify-center gap-2">
           <h4>Wind Speed</h4>
-          <p className="font-light">{Math.floor(weather.Night?.Wind?.Speed?.Value)} km/h</p>
+          <p className="font-light">
+            {Math.floor(weather.Night?.Wind?.Speed?.Value)}
+            &nbsp;
+            {weather.Night?.Wind?.Speed?.Unit}
+          </p>
         </div>
         <div className="shadow-md p-4 rounded-md flex flex-col items-center justify-center gap-2">
           <h4>Air Quality</h4>
