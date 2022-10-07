@@ -21,20 +21,7 @@ function DisplayWeather() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('day');
   const [swapUnit, setUnits] = useState(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
-  const [buttonText, setButtonText] = useState('metric');
-
-  //Toggle between celsius and fahrenheit
-  function changeParams(e) {
-    e.preventDefault();
-
-    if (buttonText === 'Imperial') {
-      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
-      setButtonText('Metric');
-    } else {
-      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=false`);
-      setButtonText('Imperial');
-    }
-  }
+  const [buttonText, setButtonText] = useState('Imperial');
 
   useEffect(() => {
     setLoading(true);
@@ -53,6 +40,19 @@ function DisplayWeather() {
       setLoading(false);
     }, 2000);
   }, [swapUnit]);
+
+  //Toggle between celsius and fahrenheit
+  function changeParams(e) {
+    e.preventDefault();
+
+    if (buttonText === 'Imperial') {
+      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=false`);
+      setButtonText('Metric');
+    } else {
+      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
+      setButtonText('Imperial');
+    }
+  }
 
   return (
     <>
