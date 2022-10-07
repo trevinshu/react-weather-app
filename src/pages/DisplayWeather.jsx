@@ -23,36 +23,36 @@ function DisplayWeather() {
   const [swapUnit, setUnits] = useState(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
   const [buttonText, setButtonText] = useState('metric');
 
-  const displayWeather = async () => {
-    const data = await fetch(swapUnit);
-    const result = await data.json();
-    setDisplayedWeather(result);
-  };
+  //Toggle between celsius and fahrenheit
+  function changeParams(e) {
+    e.preventDefault();
+
+    if (buttonText === 'Imperial') {
+      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
+      setButtonText('Metric');
+    } else {
+      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=false`);
+      setButtonText('Imperial');
+    }
+  }
 
   useEffect(() => {
     setLoading(true);
+
+    //Fetch selected weather forecast
+    const displayWeather = async () => {
+      const data = await fetch(swapUnit);
+      const result = await data.json();
+      setDisplayedWeather(result);
+    };
+
+    //Timeout to delay display of weather forecast & show loading state
     setTimeout(() => {
       displayWeather();
       toast.success(`Weather for ${city}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
       setLoading(false);
     }, 2000);
   }, [swapUnit]);
-
-  let toggle = false;
-  function changeParams(e) {
-    e.preventDefault();
-    toggle = !toggle;
-
-    if (toggle) {
-      setButtonText('Metric');
-      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=false`);
-    } else {
-      setButtonText('Imperial');
-      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
-    }
-  }
-
-  console.log(displayedWeather);
 
   return (
     <>
@@ -78,7 +78,7 @@ function DisplayWeather() {
                 Night
               </button>
             </div>
-            <button onClick={changeParams} className="bg-gray-700 p-2 rounded text-white uppercase tracking-widest" type="button">
+            <button onClick={changeParams} className="bg-gray-700 p-2 rounded text-white uppercase tracking-widest">
               {buttonText}
             </button>
           </div>
