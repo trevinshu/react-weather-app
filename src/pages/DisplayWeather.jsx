@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import BeatLoader from 'react-spinners/BeatLoader';
 import WeatherItemsDay from '../components/WeatherItemsDay';
 import { motion } from 'framer-motion';
@@ -57,22 +57,24 @@ function DisplayWeather() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center text-center h-full">
+        <div className="flex justify-center items-center text-center h-full m-auto">
           <BeatLoader color="#374151" margin={0} size={30} />
         </div>
       ) : (
-        <div className="my-10 px-5 md:px-10">
-          <h2 className="text-4xl text-center uppercase tracking-widest pb-5">{city}</h2>
+        <motion.div className="mt-10 px-5 md:px-10" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween', delay: 0.2 }}>
+          <h2 className="text-4xl text-center uppercase tracking-widest pb-5 dark:text-slate-100">{city}</h2>
           <div className="flex justify-between mb-5">
             <div className="flex gap-2 justify-center items-center">
               <button
-                className={activeTab === 'day' ? 'active [&.active]:bg-gray-700 p-2 rounded text-white uppercase tracking-widest' : 'uppercase tracking-widest'}
+                className={activeTab === 'day' ? 'active [&.active]:bg-gray-700 p-2 rounded text-white uppercase tracking-widest dark:text-slate-100' : 'uppercase tracking-widest dark:text-slate-100'}
                 onClick={() => setActiveTab('day')}
               >
                 Day
               </button>
               <button
-                className={activeTab === 'night' ? 'active  [&.active]:bg-gray-700 p-2 rounded text-white  uppercase tracking-widest' : 'uppercase tracking-widest'}
+                className={
+                  activeTab === 'night' ? 'active  [&.active]:bg-gray-700 p-2 rounded text-white uppercase tracking-widest dark:text-slate-100' : 'uppercase tracking-widest dark:text-slate-100'
+                }
                 onClick={() => setActiveTab('night')}
               >
                 Night
@@ -101,7 +103,7 @@ function DisplayWeather() {
               </div>
             </motion.div>
           )}
-        </div>
+        </motion.div>
       )}
     </>
   );

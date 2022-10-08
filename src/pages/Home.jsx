@@ -5,8 +5,7 @@ import SearchForm from '../components/SearchForm';
 function Home() {
   return (
     <div>
-      <SearchForm />
-      <Outlet />
+      <p>Welcome to this app</p>
     </div>
   );
 }

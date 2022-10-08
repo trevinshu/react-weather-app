@@ -31,21 +31,21 @@ function SearchResult() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center text-center h-full">
+        <div className="flex justify-center items-center text-center h-full m-auto">
           <BeatLoader color="#374151" margin={0} size={30} />
         </div>
       ) : (
         <motion.div className="mt-10 px-5 md:px-10 overflow-hidden" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween', delay: 0.2 }}>
           {searchedWeather.length > 1 ? (
-            <h1 className=" text-2xl capitalize mb-5 tracking-widest ">
-              Search Results For: <span className="font-bold">{params.result}</span>
+            <h1 className=" text-2xl mb-5 tracking-widest dark:text-neutral-100 uppercase">
+              Search Results For: <span className="font-bold uppercase">{params.result}</span>
             </h1>
           ) : searchedWeather.length === 0 ? (
-            <h1 className=" text-2xl capitalize mb-5 tracking-widest ">
+            <h1 className=" text-2xl capitalize mb-5 tracking-widest dark:text-neutral-100">
               No search Results For: <span className="font-bold">{params.result}</span>
             </h1>
           ) : (
-            <h1 className=" text-2xl capitalize mb-5 tracking-widest ">
+            <h1 className=" text-2xl capitalize mb-5 tracking-widest dark:text-neutral-100">
               Search Result For: <span className="font-bold">{params.result}</span>
             </h1>
           )}
