@@ -10,8 +10,6 @@ function DisplayWeather() {
   const location = useLocation();
   const { weather } = location.state;
 
-  const latitude = weather.GeoPosition.Latitude;
-  const longitude = weather.GeoPosition.Longitude;
   const key = weather.Key;
   const city = weather.LocalizedName;
   const apiKey = import.meta.env.VITE_API_KEY;

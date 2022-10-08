@@ -24,7 +24,7 @@ function App() {
         <Route path="search/:result" element={<SearchResult />} />
         <Route path="display-weather" element={<DisplayWeather />} />
       </Routes>
-      <ToastContainer />
+      <ToastContainer theme={darkMode ? 'dark' : 'light'} />
       <Footer />
     </div>
   );
