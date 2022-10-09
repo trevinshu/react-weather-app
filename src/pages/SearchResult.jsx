@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import LocationItems from '../components/LocationItems';
-import BeatLoader from 'react-spinners/BeatLoader';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
+import Spinner from '../components/Spinner';
 
 function SearchResult() {
   const [searchedWeather, setSearchedWeather] = useState([]);
@@ -31,9 +31,7 @@ function SearchResult() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center text-center h-full m-auto">
-          <BeatLoader color="#374151" margin={0} size={30} />
-        </div>
+        <Spinner />
       ) : (
         <motion.div className="mt-10 px-5 md:px-10 overflow-hidden" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween', delay: 0.2 }}>
           {searchedWeather.length > 1 ? (

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
-import BeatLoader from 'react-spinners/BeatLoader';
 import WeatherItemsDay from '../components/WeatherItemsDay';
 import { motion } from 'framer-motion';
 import WeatherItemsNight from '../components/WeatherItemsNight';
+import Spinner from '../components/Spinner';
 
 function DisplayWeather() {
   const location = useLocation();
@@ -55,9 +55,7 @@ function DisplayWeather() {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center text-center h-full m-auto">
-          <BeatLoader color="#374151" margin={0} size={30} />
-        </div>
+        <Spinner />
       ) : (
         <motion.div className="mt-10 px-5 md:px-10" initial={{ x: '-100vw' }} animate={{ x: 0 }} transition={{ type: 'tween', delay: 0.2 }}>
           <h2 className="text-4xl text-center uppercase tracking-widest pb-5 dark:text-slate-100">{city}</h2>
