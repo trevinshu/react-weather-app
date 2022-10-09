@@ -21,6 +21,8 @@ function App() {
       setDarkMode(JSON.parse(storedPreference));
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setDarkMode(true);
+    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      setDarkMode(false);
     } else {
       setDarkMode(false);
     }
