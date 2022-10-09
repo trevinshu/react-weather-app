@@ -19,19 +19,21 @@ function App() {
     const storedPreference = localStorage.getItem('prefersDarkMode');
     if (storedPreference) {
       setDarkMode(JSON.parse(storedPreference));
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setDarkMode(true);
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      setDarkMode(false);
     } else {
-      setDarkMode(false);
+      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(prefersDarkMode);
     }
   }, []);
 
   //Set to Local Storage
   useEffect(() => {
-    localStorage.setItem('prefersDarkMode', darkMode ? 'true' : 'false');
-    darkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark');
+    if (darkMode) {
+      localStorage.setItem('prefersDarkMode', 'true');
+      document.body.classList.add('dark');
+    } else {
+      localStorage.setItem('prefersDarkMode', 'false');
+      document.body.classList.remove('dark');
+    }
   }, [darkMode]);
   return (
     <div className={darkMode ? 'flex flex-col min-h-screen bg-gray-800' : 'bg-neutral-50 flex flex-col min-h-screen'}>
