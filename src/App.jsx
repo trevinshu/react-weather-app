@@ -19,9 +19,10 @@ function App() {
     const storedPreference = localStorage.getItem('prefersDarkMode');
     if (storedPreference) {
       setDarkMode(JSON.parse(storedPreference));
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setDarkMode(true);
     } else {
-      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setDarkMode(prefersDarkMode);
+      setDarkMode(false);
     }
   }, []);
 
