@@ -9,10 +9,14 @@ function SearchForm() {
   const searchRecipe = (e) => {
     e.preventDefault();
 
-    if (text === '') {
-      toast.error('Please enter a Location', { position: 'bottom-center' });
-    } else {
-      navigate('/search/' + text.toLowerCase().trim());
+    try {
+      if (text === '') {
+        toast.error('Please enter a Location', { position: 'bottom-center' });
+      } else {
+        navigate('/search/' + text.toLowerCase().trim());
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

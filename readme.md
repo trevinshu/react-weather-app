@@ -1,10 +1,43 @@
-# React Weather App
+# React Weather Application
 
-## Description
+Single page web application that fetches the weather of a location the user searched for.
 
-Rebuilding my weather app in react
+## Live Demo
 
-## Libraries, Hooks, Techniques Used
+https://react-weather-app-trevinshu.vercel.app/
+
+## Local Usage
+
+1.Register for an AccuWeather account on https://developer.accuweather.com/ and get a free API key.
+2.Download or Clone this Repo.
+3.Create a dotenv file (.env) in the root of the application and enter the api key you got in step one in the dotenv file like this:
+
+```env
+VITE_API_KEY=yourapikey
+```
+
+4.Open the terminal in your editor of choice and install all the required packaged like this:
+
+```js
+npm install
+```
+
+5.Run the application from the command line.
+
+```js
+npm run dev
+```
+
+## Tools, Frameworks, Languages Used
+
+1. React
+2. Tailwind CSS
+3. Vite
+4. React Router
+5. React Toastify
+6. React Icons
+7. React Spinners
+8. Framer Motion
 
 ## Author
 

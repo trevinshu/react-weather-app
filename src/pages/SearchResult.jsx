@@ -14,18 +14,26 @@ function SearchResult() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const searchResult = async (query) => {
-    const data = await fetch(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${query}`);
-    const results = await data.json();
-    setSearchedWeather(results.slice(0, 5));
+    try {
+      const data = await fetch(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${query}`);
+      const results = await data.json();
+      setSearchedWeather(results.slice(0, 5));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      searchResult(params.result);
-      toast.success(`Result for ${params.result.toLowerCase().trim()}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
-      setLoading(false);
-    }, 2000);
+    try {
+      setLoading(true);
+      setTimeout(() => {
+        searchResult(params.result);
+        toast.success(`Result for ${params.result.charAt(0).toUpperCase() + params.result.slice(1).trim()}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
+        setLoading(false);
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
   }, [params.result]);
 
   return (

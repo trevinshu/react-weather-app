@@ -25,30 +25,37 @@ function DisplayWeather() {
     setLoading(true);
 
     //Fetch selected weather forecast
-    const displayWeather = async () => {
-      const data = await fetch(swapUnit);
-      const result = await data.json();
-      setDisplayedWeather(result);
-    };
-
-    //Timeout to delay display of weather forecast & show loading state
-    setTimeout(() => {
-      displayWeather();
-      toast.success(`Weather for ${city}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
-      setLoading(false);
-    }, 2000);
+    try {
+      const displayWeather = async () => {
+        const data = await fetch(swapUnit);
+        const result = await data.json();
+        setDisplayedWeather(result);
+      };
+      //Timeout to delay display of weather forecast & show loading state
+      setTimeout(() => {
+        displayWeather();
+        toast.success(`Weather For ${city}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
+        setLoading(false);
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
   }, [swapUnit]);
 
   //Toggle between celsius and fahrenheit
   function changeParams(e) {
     e.preventDefault();
 
-    if (buttonText === 'Imperial') {
-      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=false`);
-      setButtonText('Metric');
-    } else {
-      setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
-      setButtonText('Imperial');
+    try {
+      if (buttonText === 'Imperial') {
+        setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=false`);
+        setButtonText('Metric');
+      } else {
+        setUnits(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
+        setButtonText('Imperial');
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 

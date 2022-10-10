@@ -17,22 +17,30 @@ function App() {
   //Call from local Storage
   useEffect(() => {
     const storedPreference = localStorage.getItem('prefersDarkMode');
-    if (storedPreference) {
-      setDarkMode(JSON.parse(storedPreference));
-    } else {
-      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setDarkMode(prefersDarkMode);
+    try {
+      if (storedPreference) {
+        setDarkMode(JSON.parse(storedPreference));
+      } else {
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setDarkMode(prefersDarkMode);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, []);
 
   //Set to Local Storage
   useEffect(() => {
-    if (darkMode) {
-      localStorage.setItem('prefersDarkMode', 'true');
-      document.body.classList.add('dark');
-    } else {
-      localStorage.setItem('prefersDarkMode', 'false');
-      document.body.classList.remove('dark');
+    try {
+      if (darkMode) {
+        localStorage.setItem('prefersDarkMode', 'true');
+        document.body.classList.add('dark');
+      } else {
+        localStorage.setItem('prefersDarkMode', 'false');
+        document.body.classList.remove('dark');
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [darkMode]);
   return (
