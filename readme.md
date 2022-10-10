@@ -28,6 +28,8 @@ npm install
 npm run dev
 ```
 
+6.Control + Click or Command + Click the URL displayed in the terminal to open the application in your web browser.
+
 ## Tools, Frameworks, Languages Used
 
 1. React
