@@ -10,6 +10,7 @@ import SearchForm from './components/SearchForm';
 import { BsFillMoonFill } from 'react-icons/bs';
 import { BsFillSunFill } from 'react-icons/bs/';
 import { useState, useEffect } from 'react';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -59,6 +60,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="search/:result" element={<SearchResult />} />
         <Route path="display-weather" element={<DisplayWeather />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
       <ToastContainer theme={darkMode ? 'dark' : 'light'} />
       <Footer />
