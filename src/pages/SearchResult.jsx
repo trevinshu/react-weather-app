@@ -1,33 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import LocationItems from '../components/LocationItems';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import Spinner from '../components/Spinner';
+import AppContext from '../context/AppContext';
 
 function SearchResult() {
-  const [searchedWeather, setSearchedWeather] = useState([]);
-  const [loading, setLoading] = useState(false);
   const params = useParams();
   const customId = 'custom-id-yes';
-
   const apiKey = import.meta.env.VITE_API_KEY;
 
-  const searchResult = async (query) => {
-    try {
-      const data = await fetch(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${query}`);
-      const results = await data.json();
-      setSearchedWeather(results.slice(0, 5));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { searchResult, searchedWeather } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     try {
       setLoading(true);
       setTimeout(() => {
-        searchResult(params.result);
+        searchResult(apiKey, params.result);
         toast.success(`Result for ${params.result.charAt(0).toUpperCase() + params.result.slice(1).trim()}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
         setLoading(false);
       }, 2000);

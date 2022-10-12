@@ -11,6 +11,7 @@ import { BsFillMoonFill } from 'react-icons/bs';
 import { BsFillSunFill } from 'react-icons/bs/';
 import { useState, useEffect } from 'react';
 import ErrorPage from './pages/ErrorPage';
+import { AppProvider } from './context/AppContext';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -45,26 +46,28 @@ function App() {
     }
   }, [darkMode]);
   return (
-    <div className={darkMode ? 'flex flex-col min-h-screen bg-gray-800' : 'bg-neutral-50 flex flex-col min-h-screen'}>
-      <Header>
-        <button
-          onClick={() => {
-            setDarkMode(!darkMode);
-          }}
-        >
-          {darkMode ? <BsFillSunFill className="fill-neutral-100 text-2xl" /> : <BsFillMoonFill className="fill-gray-700 text-2xl" />}
-        </button>
-      </Header>
-      <SearchForm />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="search/:result" element={<SearchResult />} />
-        <Route path="display-weather" element={<DisplayWeather />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-      <ToastContainer theme={darkMode ? 'dark' : 'light'} />
-      <Footer />
-    </div>
+    <AppProvider>
+      <div className={darkMode ? 'flex flex-col min-h-screen bg-gray-800' : 'bg-neutral-50 flex flex-col min-h-screen'}>
+        <Header>
+          <button
+            onClick={() => {
+              setDarkMode(!darkMode);
+            }}
+          >
+            {darkMode ? <BsFillSunFill className="fill-neutral-100 text-2xl" /> : <BsFillMoonFill className="fill-gray-700 text-2xl" />}
+          </button>
+        </Header>
+        <SearchForm />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="search/:result" element={<SearchResult />} />
+          <Route path="display-weather" element={<DisplayWeather />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        <ToastContainer theme={darkMode ? 'dark' : 'light'} />
+        <Footer />
+      </div>
+    </AppProvider>
   );
 }
 

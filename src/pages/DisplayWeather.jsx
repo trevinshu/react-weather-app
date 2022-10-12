@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
 import WeatherItemsDay from '../components/WeatherItemsDay';
 import { motion } from 'framer-motion';
 import WeatherItemsNight from '../components/WeatherItemsNight';
 import Spinner from '../components/Spinner';
+import AppContext from '../context/AppContext';
 
 function DisplayWeather() {
   const location = useLocation();
@@ -15,25 +16,19 @@ function DisplayWeather() {
   const apiKey = import.meta.env.VITE_API_KEY;
   const customId = 'custom-id-yes';
 
-  const [displayedWeather, setDisplayedWeather] = useState(null);
+  const { displayWeather, displayedWeather } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('day');
+
   const [swapUnit, setUnits] = useState(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}&details=true&metric=true`);
   const [buttonText, setButtonText] = useState('Imperial');
 
   useEffect(() => {
     setLoading(true);
-
-    //Fetch selected weather forecast
     try {
-      const displayWeather = async () => {
-        const data = await fetch(swapUnit);
-        const result = await data.json();
-        setDisplayedWeather(result);
-      };
       //Timeout to delay display of weather forecast & show loading state
       setTimeout(() => {
-        displayWeather();
+        displayWeather(swapUnit);
         toast.success(`Weather For ${city}`, { position: 'top-center', hideProgressBar: true, toastId: customId });
         setLoading(false);
       }, 2000);
