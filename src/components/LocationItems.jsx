@@ -15,7 +15,12 @@ function LocationItems({ weather, index }) {
         <span className="font-bold text-lg md:text-xl">Country: </span>
         {weather.Country.LocalizedName}
       </p>
-      <Link className="bg-gray-800 w-full rounded-md p-2 text-neutral-100 uppercase tracking-widest hover:bg-gray-600 text-center md:text-xl" to={`/display-weather`} state={{ weather: weather }}>
+      <Link
+        className="bg-gray-800 w-full rounded-md p-2 text-neutral-100 uppercase tracking-widest hover:bg-gray-600 text-center md:text-xl"
+        to={`/display-weather`}
+        state={{ weather: weather }}
+        aria-label="View the selected location forecast"
+      >
         View Weather
       </Link>
     </div>

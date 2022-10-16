@@ -66,6 +66,7 @@ function DisplayWeather() {
               <button
                 className={activeTab === 'day' ? 'active [&.active]:bg-gray-700 p-2 rounded text-white uppercase tracking-widest dark:text-slate-100' : 'uppercase tracking-widest dark:text-slate-100'}
                 onClick={() => setActiveTab('day')}
+                aria-label="Switch to day forecast"
               >
                 Day
               </button>
@@ -74,11 +75,12 @@ function DisplayWeather() {
                   activeTab === 'night' ? 'active  [&.active]:bg-gray-700 p-2 rounded text-white uppercase tracking-widest dark:text-slate-100' : 'uppercase tracking-widest dark:text-slate-100'
                 }
                 onClick={() => setActiveTab('night')}
+                aria-label="Switch to night forecast"
               >
                 Night
               </button>
             </div>
-            <button onClick={changeParams} className="bg-gray-700 p-2 rounded text-white uppercase tracking-widest">
+            <button onClick={changeParams} className="bg-gray-700 p-2 rounded text-white uppercase tracking-widest" aria-label="Switch between Celsius and Fahrenheit">
               {buttonText}
             </button>
           </div>

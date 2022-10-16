@@ -31,7 +31,7 @@ function SearchForm() {
         className="border-2 border-gray-600 rounded-md w-full p-2 lg:w-2/3 xl:w-1/2 dark:bg-gray-600 dark:text-neutral-100 dark:border-gray-700"
         placeholder="Enter a Location..."
       />
-      <button className=" bg-gray-700 w-full rounded-md p-2 text-neutral-100 uppercase tracking-wide hover:bg-gray-600 lg:w-2/3 xl:w-1/2 md:text-xl" type="button">
+      <button className=" bg-gray-700 w-full rounded-md p-2 text-neutral-100 uppercase tracking-wide hover:bg-gray-600 lg:w-2/3 xl:w-1/2 md:text-xl" type="button" aria-label="Search for the weather">
         Search Weather
       </button>
     </form>
