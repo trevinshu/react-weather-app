@@ -1,17 +1,19 @@
+import React from 'react';
 import Header from './components/Header';
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+const ErrorPage = React.lazy(() => import('./pages/ErrorPage'));
+const Home = React.lazy(() => import('./pages/Home'));
+const SearchResult = React.lazy(() => import('./pages/SearchResult'));
+const DisplayWeather = React.lazy(() => import('./pages/DisplayWeather'));
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SearchResult from './pages/SearchResult';
-import DisplayWeather from './pages/DisplayWeather';
 import Footer from './components/Footer';
 import SearchForm from './components/SearchForm';
 import { BsFillMoonFill } from 'react-icons/bs';
 import { BsFillSunFill } from 'react-icons/bs/';
 import { useState, useEffect } from 'react';
-import ErrorPage from './pages/ErrorPage';
 import { AppProvider } from './context/AppContext';
+import Spinner from './components/Spinner';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -59,10 +61,38 @@ function App() {
         </Header>
         <SearchForm />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="search/:result" element={<SearchResult />} />
-          <Route path="display-weather" element={<DisplayWeather />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route
+            path="*"
+            element={
+              <React.Suspense fallback={<Spinner />}>
+                <ErrorPage />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <React.Suspense fallback={<Spinner />}>
+                <Home />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="search/:result"
+            element={
+              <React.Suspense fallback={<Spinner />}>
+                <SearchResult />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="display-weather"
+            element={
+              <React.Suspense fallback={<Spinner />}>
+                <DisplayWeather />
+              </React.Suspense>
+            }
+          />
         </Routes>
         <ToastContainer theme={darkMode ? 'dark' : 'light'} />
         <Footer />
