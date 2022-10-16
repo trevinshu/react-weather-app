@@ -55,6 +55,7 @@ function App() {
             onClick={() => {
               setDarkMode(!darkMode);
             }}
+            type="button"
           >
             {darkMode ? <BsFillSunFill className="fill-neutral-100 text-2xl" /> : <BsFillMoonFill className="fill-gray-700 text-2xl" />}
           </button>
